@@ -3,58 +3,58 @@ on: [push]
 
 jobs:
 
-  deploy-eks:
-    name: Deploy EKS cluster
-    runs-on: ubuntu-latest
+  # deploy-eks:
+  #   name: Deploy EKS cluster
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v2
 
-    - name: Set up Terraform
-      uses: hashicorp/setup-terraform@v1
-      with:
-        terraform_version: '1.10.5'  # Specify your Terraform version
+  #   - name: Set up Terraform
+  #     uses: hashicorp/setup-terraform@v1
+  #     with:
+  #       terraform_version: '1.10.5'  # Specify your Terraform version
 
-    - name: Set up AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-west-2 
+  #   - name: Set up AWS credentials
+  #     uses: aws-actions/configure-aws-credentials@v1
+  #     with:
+  #       aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #       aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #       aws-region: us-west-2 
 
-    - name: Terraform Init
-      run: terraform init
-      working-directory: ./terraform-eks  # Path to your Terraform code
+  #   - name: Terraform Init
+  #     run: terraform init
+  #     working-directory: ./terraform-eks  # Path to your Terraform code
 
-    - name: Terraform Plan
-      run: terraform plan
-      working-directory: ./terraform-eks
+  #   - name: Terraform Plan
+  #     run: terraform plan
+  #     working-directory: ./terraform-eks
 
-    - name: Terraform Apply
-      run: terraform destroy -auto-approve
-      working-directory: ./terraform-eks
+  #   - name: Terraform Apply
+  #     run: terraform destroy -auto-approve
+  #     working-directory: ./terraform-eks
 
-    - name: Get EKS Cluster Name
-      id: eks_output
-      run: |
-        export CLUSTER_NAME=$(terraform output -raw cluster_name)
-        echo "CLUSTER_NAME=$CLUSTER_NAME" >> $GITHUB_ENV
-        echo "EKS Cluster Name: $CLUSTER_NAME"
+  #   - name: Get EKS Cluster Name
+  #     id: eks_output
+  #     run: |
+  #       export CLUSTER_NAME=$(terraform output -raw cluster_name)
+  #       echo "CLUSTER_NAME=$CLUSTER_NAME" >> $GITHUB_ENV
+  #       echo "EKS Cluster Name: $CLUSTER_NAME"
 
-    - name: Set up kubectl
-      uses: azure/setup-kubectl@v4
-      with:
-        version: 'v1.21.0'  # Set your desired kubectl version
+  #   - name: Set up kubectl
+  #     uses: azure/setup-kubectl@v4
+  #     with:
+  #       version: 'v1.21.0'  # Set your desired kubectl version
 
-    - name: Configure kubectl for EKS
-      run: |
-        aws eks --region us-west-2 update-kubeconfig --name ${{ env.CLUSTER_NAME }} --region us-east-2
+  #   - name: Configure kubectl for EKS
+  #     run: |
+  #       aws eks --region us-west-2 update-kubeconfig --name ${{ env.CLUSTER_NAME }} --region us-east-2
 
   build-test:
     name: Running tests for Python app
     runs-on: ubuntu-latest
-    needs: deploy-eks
+    #needs: deploy-eks
     steps:
 
       - name: Checkout code
