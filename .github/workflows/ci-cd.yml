@@ -135,7 +135,8 @@ jobs:
         run: |
           IMAGE_TAG=$(git rev-parse --short HEAD)
           IMAGE_NAME=ptc-image
-          echo    $IMAGE_NAME $IMAGE_TAG
+          echo "Deploying ptc-app with image: ${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME:$IMAGE_TAG"
           helm upgrade --install ptc-app . \
             --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME \
             --set image.tag=$IMAGE_TAG
+          helm get values ptc-app
