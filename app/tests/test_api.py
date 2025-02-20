@@ -1,7 +1,7 @@
 import pytest
 from fastapi.testclient import TestClient
 from ..main import app
-from database import Base, engine, SessionLocal
+from ..database import Base, engine, SessionLocal
 
 # Use an in-memory SQLite DB for testing
 Base.metadata.create_all(bind=engine)
