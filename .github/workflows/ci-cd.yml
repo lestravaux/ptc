@@ -131,9 +131,10 @@ jobs:
           aws eks update-kubeconfig --name ${{ secrets.CLUSTER_NAME }} --region us-east-2
 
       - name: Deploy with Helm
-        working-directory: ./helm/python-api
+        working-directory: ./helm/ptc-chart
         run: |
-          IMAGE_TAG=$(git rev-parse --short HEAD)
-          helm upgrade --install python-api . \
-            --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/ptc-repo \
+          #IMAGE_TAG=$(git rev-parse --short HEAD)
+          IMAGE_NAME=ptc-image
+          helm upgrade --install ptc-app . \
+            --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME \
             --set image.tag=$IMAGE_TAG
