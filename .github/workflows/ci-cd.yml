@@ -105,7 +105,6 @@ jobs:
     name: Deploy application to EKS
     runs-on: ubuntu-latest
     needs: docker-build
-    if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -139,5 +138,8 @@ jobs:
           IMAGE_NAME=ptc-image
           echo "Deploying ptc-app with image: ${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME:$IMAGE_TAG"
           helm upgrade --install ptc-app . --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set image.tag=rien --force
-          echo "Deployed ptc-app with image: ${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME:$IMAGE_TAG"
           helm get values ptc-app  
+
+
+
+#if: github.ref == 'refs/heads/main'
