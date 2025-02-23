@@ -32,9 +32,9 @@ curl -X POST http://127.0.0.1:8000/user \
      -H "Content-Type: application/json" \
      -d '{"name": "Denis Fongang", "email": "fongang@outlook.fr"}'
 
-curl -X POST http://127.0.0.1:8000/user \
-     -H "Content-Type: application/json" \
-     -d '{"name": "rien", "email": "rien@outlook.fr"}'
+curl -X POST http://127.0.0.1:8000/user -H "Content-Type: application/json" -d '{"name": "rien", "email": "rien@outlook.fr"}'
+
+curl -X POST a25d14fe371834b3aa4698e4c9204d8c-1455076253.us-east-2.elb.amazonaws.com -H "Content-Type: application/json" -d '{"name": "rien", "email": "rien@outlook.fr"}'
 
      aws eks update-kubeconfig --region us-east-2 --name 
      kubectl create namespace argocd
