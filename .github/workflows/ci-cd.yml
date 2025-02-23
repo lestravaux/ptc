@@ -107,15 +107,15 @@ jobs:
     needs: docker-build
     steps:
 
-      - name: Set IMAGE_TAG
-        run: |
-          IMAGE_TAG=$(git rev-parse --short HEAD)
-          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
-
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
+      - name: Set IMAGE_TAG
+        run: |
+          IMAGE_TAG=$(git rev-parse --short HEAD)
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
 
       - name: Set up kubectl
         uses: azure/setup-kubectl@v4
