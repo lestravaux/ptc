@@ -138,7 +138,7 @@ jobs:
           IMAGE_NAME=ptc-image
           echo "Deploying ptc-app with image: ${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME:$IMAGE_TAG"
           helm upgrade --install ptc-app2 . --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set image.tag=rien --force
-          helm get values ptc-app  
+          helm get values ptc-app2  
 
 
 
