@@ -147,12 +147,13 @@ jobs:
           IMAGE_TAG=$(git rev-parse --short HEAD)
           IMAGE_NAME=ptc-image
           echo "Deploying ptc-app with image: ${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME:$IMAGE_TAG"
-          #cat values.yaml
+          cat values.yaml
           helm list
           helm upgrade --install ptc-application ptc-chart --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME #--set-string image.tag=${IMAGE_TAG} --force --dry-run --debug
           helm upgrade --install ptc-application ptc-chart --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME #--set-string image.tag=${IMAGE_TAG} --force
           helm get values ptc-application 
           helm list 
+          cat values.yaml
           unset IMAGE_TAG
           export IMAGE_TAG="" 
 
