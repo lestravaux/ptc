@@ -145,7 +145,7 @@ jobs:
           echo "Deploying ptc-app with image: ${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME:$IMAGE_TAG"
           #cat values.yaml
           #helm list
-          helm upgrade ptc-application --install . --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set image.tag=$IMAGE_TAG --force
+          helm upgrade ptc-application . --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set image.tag=$IMAGE_TAG --force
           helm get values ptc-application
 
 
