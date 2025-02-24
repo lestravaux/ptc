@@ -154,6 +154,6 @@ jobs:
           helm get values ptc-application 
           helm list 
           unset IMAGE_TAG
-          export IMAGE_TAG=""
+          export IMAGE_TAG="" 
 
 #if: github.ref == 'refs/heads/main'
