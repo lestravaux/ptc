@@ -4,8 +4,8 @@ metadata:
   name: "{{ include "ptc-chart.fullname" . }}-test-connection"
   labels:
     {{- include "ptc-chart.labels" . | nindent 4 }}
-  annotations:
-    "helm.sh/hook": test
+  # annotations:
+  #   "helm.sh/hook": test
 spec:
   containers:
     - name: wget
