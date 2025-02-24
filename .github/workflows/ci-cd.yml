@@ -138,7 +138,7 @@ jobs:
           aws eks update-kubeconfig --name ${{ secrets.CLUSTER_NAME }} --region us-east-2
 
       - name: Deploy with Helm
-        working-directory: ./helm/ptc-chart
+        working-directory: ./helm
         run: |
          # IMAGE_TAG=$(git rev-parse --short HEAD)
           IMAGE_NAME=ptc-image
@@ -146,7 +146,7 @@ jobs:
           #cat values.yaml
           #helm list
           helm uninstall ptc-application
-          helm upgrade ptc-application . --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set image.tag=$IMAGE_TAG --force
+          helm upgrade --install ptc-application ptc-chart --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set image.tag=$IMAGE_TAG --force
           helm get values ptc-application 
 
 
