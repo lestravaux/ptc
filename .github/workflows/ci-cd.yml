@@ -143,7 +143,6 @@ jobs:
           echo $IMAGE_TAG
           unset IMAGE_TAG
           export IMAGE_TAG=""
-          git fetch --unshallow
           git pull origin main
           IMAGE_TAG=$(git rev-parse --short HEAD)
           IMAGE_NAME=ptc-image
