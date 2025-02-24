@@ -151,6 +151,7 @@ jobs:
           helm list
           helm upgrade --install ptc-application ptc-chart --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set image.tag=riendutout --force
           helm get values ptc-application 
+          helm list
 
 
 
