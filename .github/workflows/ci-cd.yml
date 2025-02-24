@@ -153,6 +153,7 @@ jobs:
           helm upgrade --install ptc-application ptc-chart --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set-string image.tag=riendutout --force
           helm get values ptc-application 
           helm list 
-
+          unset IMAGE_TAG
+          export IMAGE_TAG=""
 
 #if: github.ref == 'refs/heads/main'
