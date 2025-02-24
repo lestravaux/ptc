@@ -146,7 +146,7 @@ jobs:
           #cat values.yaml
           #helm list
           helm upgrade ptc-application . --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set image.tag=$IMAGE_TAG --force
-          helm get values ptc-application
+          helm get values ptc-application 
 
 
 
