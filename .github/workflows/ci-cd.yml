@@ -137,6 +137,19 @@ jobs:
           #aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
           aws eks update-kubeconfig --name ${{ secrets.CLUSTER_NAME }} --region us-east-2
 
+      - name: Deploy Helm
+        uses: bitovi/github-actions-deploy-eks-helm@v1.2.12
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+          cluster-name: ${{ secrets.CLUSTER_NAME }}
+          config-files: helm/ptc-chart/values.yaml
+          chart-path: helm/ptc-chart/
+          #namespace: default
+          values: image.tag=test5
+          name: ptc-application-ga
+
       - name: Deploy with Helm
         working-directory: ./helm
         run: |
@@ -150,7 +163,7 @@ jobs:
           cat ptc-chart/values.yaml
           helm list
           # helm upgrade --install ptc-application ptc-chart --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set-string image.tag=${IMAGE_TAG} --force --dry-run --debug
-          helm upgrade --install ptc-application ptc-chart --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set-string image.tag=test2 --force
+          helm upgrade --install ptc-application ptc-chart --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set-string image.tag=test5 --force
           helm get values ptc-application 
           helm list 
           cat ptc-chart/values.yaml
