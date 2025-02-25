@@ -147,7 +147,7 @@ jobs:
           config-files: helm/ptc-chart/values.yaml
           chart-path: helm/ptc-chart/
           #namespace: default
-          values: image.tag=test5
+          values: image.tag=test6
           name: ptc-application-ga
 
       - name: Deploy with Helm
