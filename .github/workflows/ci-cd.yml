@@ -150,7 +150,7 @@ jobs:
           cat ptc-chart/values.yaml
           helm list
           # helm upgrade --install ptc-application ptc-chart --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set-string image.tag=${IMAGE_TAG} --force --dry-run --debug
-          helm upgrade --install ptc-application ptc-chart --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set-string image.tag=test1 --force
+          helm upgrade --install ptc-application ptc-chart --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set-string image.tag=test2 --force
           helm get values ptc-application 
           helm list 
           cat ptc-chart/values.yaml
