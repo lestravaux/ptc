@@ -140,21 +140,21 @@ jobs:
       - name: Deploy with Helm
         working-directory: ./helm
         run: |
-          echo $IMAGE_TAG
-          unset IMAGE_TAG
-          export IMAGE_TAG=""
-          git pull origin main
-          IMAGE_TAG=$(git rev-parse --short HEAD)
+          # echo $IMAGE_TAG
+          # unset IMAGE_TAG
+          # export IMAGE_TAG=""
+          # git pull origin main
+          # IMAGE_TAG=$(git rev-parse --short HEAD)
           IMAGE_NAME=ptc-image
           echo "Deploying ptc-app with image: ${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME:$IMAGE_TAG"
           cat ptc-chart/values.yaml
           helm list
-          helm upgrade --install ptc-application ptc-chart --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME #--set-string image.tag=${IMAGE_TAG} --force --dry-run --debug
-          helm upgrade --install ptc-application ptc-chart --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME #--set-string image.tag=${IMAGE_TAG} --force
+          # helm upgrade --install ptc-application ptc-chart --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set-string image.tag=${IMAGE_TAG} --force --dry-run --debug
+          helm upgrade --install ptc-application ptc-chart --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set-string image.tag=test1 --force
           helm get values ptc-application 
           helm list 
           cat ptc-chart/values.yaml
-          unset IMAGE_TAG
-          export IMAGE_TAG="" 
+          # unset IMAGE_TAG
+          # export IMAGE_TAG="" 
 
 #if: github.ref == 'refs/heads/main'
