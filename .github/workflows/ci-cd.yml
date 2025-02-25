@@ -163,25 +163,25 @@ jobs:
           values: image.repository=${{ secrets.DOCKERHUB_USERNAME }}/ptc-image,image.tag=${{ env.IMAGE_TAG }}
           name: ptc-application-ga
 
-      - name: Deploy with Helm
-        working-directory: ./helm
-        run: |
-          # echo $IMAGE_TAG
-          # unset IMAGE_TAG
-          # export IMAGE_TAG=""
-          # git pull origin main
-          # IMAGE_TAG=$(git rev-parse --short HEAD)
-          IMAGE_NAME=ptc-image
-          echo "Deploying ptc-app with image: ${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME:$IMAGE_TAG"
-          cat ptc-chart/values.yaml
-          helm list
-          # helm upgrade --install ptc-application ptc-chart --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set-string image.tag=${IMAGE_TAG} --force --dry-run --debug
-          # helm upgrade --install ptc-application ptc-chart --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set-string image.tag=test5 --force
-          helm upgrade --install --timeout 0s -f ptc-chart/values.yaml --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set image.tag=test7 --dependency-update --create-namespace ptc-application ptc-chart/
-          helm get values ptc-application 
-          helm list 
-          cat ptc-chart/values.yaml
-          # unset IMAGE_TAG
-          # export IMAGE_TAG="" 
+#       - name: Deploy with Helm
+#         working-directory: ./helm
+#         run: |
+#           # echo $IMAGE_TAG
+#           # unset IMAGE_TAG
+#           # export IMAGE_TAG=""
+#           # git pull origin main
+#           # IMAGE_TAG=$(git rev-parse --short HEAD)
+#           IMAGE_NAME=ptc-image
+#           echo "Deploying ptc-app with image: ${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME:$IMAGE_TAG"
+#           cat ptc-chart/values.yaml
+#           helm list
+#           # helm upgrade --install ptc-application ptc-chart --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set-string image.tag=${IMAGE_TAG} --force --dry-run --debug
+#           # helm upgrade --install ptc-application ptc-chart --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set-string image.tag=test5 --force
+#           helm upgrade --install --timeout 0s -f ptc-chart/values.yaml --set image.repository=${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME --set image.tag=test7 --dependency-update --create-namespace ptc-application ptc-chart/
+#           helm get values ptc-application 
+#           helm list 
+#           cat ptc-chart/values.yaml
+#           # unset IMAGE_TAG
+#           # export IMAGE_TAG="" 
 
-#if: github.ref == 'refs/heads/main'
+# #if: github.ref == 'refs/heads/main'
